@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			
+			var x = 100;
+			var y = 100;
+			var w = 50;
+			var h = 50;
+			//var color = 30, 50, 169, 202;
+			//var stroke = "250, 241, 3";
+			var color = 0x990bc1f4;
+			var stroke = 0x99fbf806;
+			var sw = 10;
+
+			function sketch(processing) {
+				var p = processing;
+				//Setup
+				p.setup = function() {
+					p.size(600,300);
+					p.background(255);
+				}
+				//Draw
+				p.draw = function() {   
+					x = x + 1;
+					h = h + 1;
+	    			w = w + 1;
+	  				
+	  				p.fill(color);
+					p.noStroke();
+					p.background(255);
+	  				p.ellipse(x,y,h,w);
+
+	 			}
+	  		}
+
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>

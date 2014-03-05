@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			
+			var x = 10;
+			var y = 10;
+			var width = 300;
+			var height = 150;
+
+			//var color = 30, 50, 169, 202;
+			//var stroke = "250, 241, 3";
+
+			var color = 0x990bc1f4;
+			var stroke = 0x99fbf806;
+			var sw = 10;
+
+			function sketch(processing) {
+
+				var p = processing;
+				
+				p.setup = function() {
+
+				p.size(500,300);
+				p.background(0);
+				p.stroke(stroke);
+				p.strokeWeight(sw);
+				p.fill(color);
+    			p.rect(x, y, width, height);
+
+    			p.rect(x+30, y+30, width, height);
+    			p.rect(x+60, y+60, width, height);
+    			p.rect(x+90, y+90, width, height);
+				}
+			}
+			
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>

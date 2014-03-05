@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}canvas{border:1px solid black;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			var x = 800 - 25;
+			var y = 200;
+			var xd = 4;
+			var yd = 4;
+
+			//Størrelsen på ball
+			var w = 25;
+			var h = 25;
+
+			var blue = 0x990bc1f4;
+			var green = 0x9929ec0f;
+			var stroke = 0x99fbf806;
+			var sw = 10;
+
+			function sketch(processing) {
+				var p = processing;
+				//Setup
+				p.setup = function() {
+					p.size(800,400);
+					p.background(0);
+					p.noStroke();
+					p.smooth();
+				}
+				//Draw
+				p.draw = function() {   
+
+					x+=xd; console.log(x);
+					y+=yd;
+					if( x<0 + w/p.PI || x>p.width - w/p.PI){xd=-xd}; //Dele på h+w/ PI for at ballen ikke skal halveres på veggen
+					if( y<0 + h/p.PI || y>p.height - h/p.PI){yd=-yd};
+
+
+	  				p.fill(blue);
+	  				p.ellipse(x,y,h,w);
+	 			}	
+	  		}
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>

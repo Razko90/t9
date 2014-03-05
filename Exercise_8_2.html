@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			
+			var x = 0;
+			var y = 150;
+			var w = 50;
+			var h = 50;
+			//var color = 30, 50, 169, 202;
+			//var stroke = "250, 241, 3";
+			var color = 0x990bc1f4;
+			var stroke = 0x99fbf806;
+			var sw = 10;
+
+			function sketch(processing) {
+				var p = processing;
+				//Setup
+				p.setup = function() {
+					p.size(600,300);
+					p.background(255);
+					p.noLoop();
+				}
+				//Draw
+				p.draw = function() {   
+					var d = p.day();
+					
+					if (d <= 9) {
+						d = "0" + d;
+					}
+					
+					var m = p.month()
+					switch(m){
+						case 1:m = "Januar";break;
+						case 2:m = "Februar";break;
+						case 3:m = "Mars";break;
+						case 4:m = "April";break;
+						case 5:m = "Mai";break;
+						case 6:m = "Juni";break;
+						case 7:m = "Juli";break;
+						case 8:m = "August";break;
+						case 9:m = "September";break;
+						case 10:m = "Okbober";break;
+						case 11:m = "November";break;
+						case 12:m = "Desember";break;
+					}
+					var y = p.year();
+					p.fill(0);
+					p.text(d, 20, 90);
+					p.text(m, 50, 90);
+					p.text(y, 90, 90);
+	 			}
+	  		}
+
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>

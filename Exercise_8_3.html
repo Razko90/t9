@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}canvas{border:1px solid black;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			// Første ball kordinater og increment variabel
+			var x = 0;
+			var y = 0;
+			var xd = 4;
+			var yd = 5;
+
+			// andre ball kordinater og increment variabel
+			var xx = 0;
+			var yy = 0;
+			var xxd = 4;
+			var yyd = 5;
+
+			//Størrelsen på ball
+			var w = 50;
+			var h = 50;
+
+			var blue = 0x990bc1f4;
+			var green = 0x9929ec0f;
+			var stroke = 0x99fbf806;
+			var sw = 10;
+
+			function sketch(processing) {
+				var p = processing;
+				//Setup
+				p.setup = function() {
+					p.size(500,500);
+					p.background(255);
+
+					x = p.random(p.width-w/p.PI);
+					y = p.random(p.height-h/p.PI);
+
+					xx = p.random(p.width-w/p.PI);	
+					yy = p.random(p.height-h/p.PI);
+
+					p.noStroke();
+					p.smooth();
+				}
+				//Draw
+				p.draw = function() {   
+
+					p.background(255);
+					
+					x+=xd;
+					y+=yd;
+					if( x<0 + w/p.PI || x>p.width - w/p.PI){xd=-xd}; //Dele på h+w/ PI for at ballen ikke skal halveres på veggen
+					if( y<0 + h/p.PI || y>p.height - h/p.PI){yd=-yd};
+
+
+	  				p.fill(blue);
+					p.ellipse(x,y,h,w);
+
+					xx+=xxd;  
+					yy+=yyd;
+					if( xx<0 + w/p.PI || xx>p.width - w/p.PI){xxd=-xxd}; 
+					if( yy<0 + h/p.PI || yy>p.height - h/p.PI){yyd=-yyd}; 
+
+	  				p.fill(green);
+	  				p.ellipse(xx,yy,h,w);
+	 			}	
+	  		}
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>
