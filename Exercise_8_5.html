@@ -13,6 +13,9 @@
 			var xd = 4;
 			var yd = 4;
 
+			var padx = 50;
+			var pady = 100;
+
 			//Størrelsen på ball
 			var w = 25;
 			var h = 25;
@@ -24,25 +27,38 @@
 
 			function sketch(processing) {
 				var p = processing;
-				//Setup
+				//setup
 				p.setup = function() {
 					p.size(800,400);
-					p.background(0);
 					p.noStroke();
 					p.smooth();
 				}
 				//Draw
 				p.draw = function() {   
+					p.background(0);
 
-					x+=xd; console.log(x);
+					x+=xd;
 					y+=yd;
 					if( x<0 + w/p.PI || x>p.width - w/p.PI){xd=-xd}; //Dele på h+w/ PI for at ballen ikke skal halveres på veggen
 					if( y<0 + h/p.PI || y>p.height - h/p.PI){yd=-yd};
 
-
 	  				p.fill(blue);
 	  				p.ellipse(x,y,h,w);
+
+	  				p.rect(padx,pady,10,100)
+	  				
 	 			}	
+
+	 			p.keyPressed = function(){
+
+	 			  if (p.key == p.CODED) {
+				    if (p.keyCode == p.UP) {
+				    	pady += 1;
+				    } else if (p.keyCode == p.DOWN) {
+				    	pady = padx-1;
+				    } 
+					}
+	 			}
 	  		}
 
 			new Processing(document.getElementById("canvas"), sketch);
