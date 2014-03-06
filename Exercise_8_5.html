@@ -11,14 +11,14 @@
 			var x = 800 - 5;
 			var y = 200;
 			var xd = 4;
-			var yd = 2;
+			var yd = 5;
 			var padw = 10;
 			var padh = 100;
 			var padx = 30;
 			var pady = 100;
             var hit = padx+padw;
-			var w = 5;
-			var h = 5;
+			var w = 7;
+			var h = 7;
             var score=0;
             var padu = false;
             var padd = false;
@@ -41,44 +41,34 @@
 					p.background(0);
 					x -= xd;
 					y += yd;
-					 if(x<0){
-                        x=p.width;
-                        y=p.random(h*2,p.height-h*2);
-                        yd=p.random(3,10);
-                        p.fill(255);
-                    	p.textSize(22);
+					if(x<0){
+						x=p.width;
+						y=p.random(h*2,p.height-h*2);
+						yd=5
+						p.fill(255);
+						p.textSize(22);
 						p.text("GAME OVER", 340, 200);
-						 p.fill(255);
-                    	p.textSize(13);
+						p.fill(255);
+						p.textSize(13);
 						p.text("Press enter to try again", 340, 220);
 						p.noLoop();
-                       }
+					}
 
 					if(x>p.width - w && xd==-1){xd=-xd};
 					if( y<0 + h || y>p.height - h){yd=-yd};
 
-
                     pady=p.constrain(pady,0,p.height-padh);
                     if(x>=hit-padw && x<=hit && y>pady && y<pady+padh){
                         xd*=-1;
-                        if(pady!=ppady){
-                            yd=(pady-ppady)/2;
-                        }
+                        if(pady!=ppady){d=(pady-ppady)/2;}
                         score++;
                     }
                    
-                     if(padu==true){
-                        pady-=5;
-                    }
-                    if(padd==true){
-                        pady+=5;
-                    }
-                    if(x>p.width){
-                        xd*=-1;
-                    }
-                    if(y>p.height-h*2 || y<h*2){
-                        yd*=-1;
-                    }
+                     if(padu==true){pady-=5;}
+                    if(padd==true){pady+=5;}
+                    if(x>p.width){xd*=-1;}
+                    if(y>p.height-h*2 || y<h*2){yd*=-1;}
+
                     p.fill(255);
                     p.textSize(20);
 					p.text("score: "+score, 30, 375);
