@@ -1,5 +1,5 @@
 T9
 ==
 
-Tema 9 - Javascript oppgaver
-Web og intraksjonsdesign NKH
+Tema 9
+Web og intraksjonsdesign
