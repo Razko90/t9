@@ -8,18 +8,21 @@
 	<body>
 		<canvas id="canvas"></canvas>
 		<script>
-			var x = 800 - 25;
+			var x = 800 - 5;
 			var y = 200;
 			var xd = 4;
-			var yd = 4;
-
-			var padx = 50;
+			var yd = 2;
+			var padw = 10;
+			var padh = 100;
+			var padx = 30;
 			var pady = 100;
-
-			//Størrelsen på ball
-			var w = 25;
-			var h = 25;
-
+            var hit = padx+padw;
+			var w = 5;
+			var h = 5;
+            var score=0;
+            var padu = false;
+            var padd = false;
+            var ppady;
 			var blue = 0x990bc1f4;
 			var green = 0x9929ec0f;
 			var stroke = 0x99fbf806;
@@ -36,32 +39,76 @@
 				//Draw
 				p.draw = function() {   
 					p.background(0);
+					x -= xd;
+					y += yd;
+					 if(x<0){
+                        x=p.width;
+                        y=p.random(h*2,p.height-h*2);
+                        yd=p.random(3,10);
+                        p.fill(255);
+                    	p.textSize(22);
+						p.text("GAME OVER", 340, 200);
+						 p.fill(255);
+                    	p.textSize(13);
+						p.text("Press enter to try again", 340, 220);
+						p.noLoop();
+                       }
 
-					x+=xd;
-					y+=yd;
-					if( x<0 + w/p.PI || x>p.width - w/p.PI){xd=-xd}; //Dele på h+w/ PI for at ballen ikke skal halveres på veggen
-					if( y<0 + h/p.PI || y>p.height - h/p.PI){yd=-yd};
+					if(x>p.width - w && xd==-1){xd=-xd};
+					if( y<0 + h || y>p.height - h){yd=-yd};
 
+
+                    pady=p.constrain(pady,0,p.height-padh);
+                    if(x>=hit-padw && x<=hit && y>pady && y<pady+padh){
+                        xd*=-1;
+                        if(pady!=ppady){
+                            yd=(pady-ppady)/2;
+                        }
+                        score++;
+                    }
+                   
+                     if(padu==true){
+                        pady-=5;
+                       // velo2*=1.03;
+                    }
+                    if(padd==true){
+                        pady+=5;
+                        //velo2*=1.03;
+                    }
+                    if(x>p.width){
+                        xd*=-1;
+                    }
+                    if(y>p.height-h*2 || y<h*2){
+                        yd*=-1;
+                    }
+                    p.fill(255);
+                    p.textSize(20);
+					p.text("score: "+score, 30, 375);
 	  				p.fill(blue);
-	  				p.ellipse(x,y,h,w);
-
-	  				p.rect(padx,pady,10,100)
-	  				
+	  				p.ellipse(x,y,h*2,w*2);
+	  				p.rect(padx,pady,padw,padh);
+	  				ppady = pady;
 	 			}	
 
 	 			p.keyPressed = function(){
-
-	 			  if (p.key == p.CODED) {
-				    if (p.keyCode == p.UP) {
-				    	pady += 1;
-				    } else if (p.keyCode == p.DOWN) {
-				    	pady = padx-1;
-				    } 
-					}
-	 			}
-	  		}
+					if (p.keyCode == p.UP) {
+							padu = true;
+						} else if (p.keyCode == p.DOWN) {
+							padd = true;
+						}
+					if (p.keyCode == p.ENTER) { score=0; p.loop();}
+				}
+					
+				p.keyReleased = function(){
+                    	padu=false;
+                   		padd=false;
+                   		//velo2=velo;
+                	}
+				}
 
 			new Processing(document.getElementById("canvas"), sketch);
+
+
 			
 		</script>
 	</body>
