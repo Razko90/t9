@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+	
+			var color = 0x990bc1f4;
+
+			function sketch(processing) {
+				var p = processing;
+
+				p.setup = function() {
+					p.size(600,300);
+					p.background(255);
+					p.noLoop();
+					p.fill(color);
+				}
+				
+				p.draw = function() {   
+					var listItems = ["item 1", "item 2", "item 3", "item 4"];
+					for (var i = 0; i < listItems.length; i++){
+						p.fill(0); 
+						p.text(listItems[i], 20, 20+i*40);
+						p.fill(color);
+						p.rect(20,30+i*40,100,10);
+					
+					}
+	 			}
+	  		}
+
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>
