@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}canvas{border:1px solid black;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			var x = 800 - 5;
+			var y = 200;
+			var xd = 4;
+			var yd = 5;
+
+			var padw = 10;
+			var padh = 100;
+
+			var padx = 30;
+			var pady = 200 -padh/2;
+
+			var padx2 = 760;
+			var pady2 = 200 -padh/2;
+
+
+			var hit = padx+padw;
+
+			var w = 7;
+			var h = 7;
+			var score=0;
+			var score2=0;
+
+			var padu = false;
+			var padd = false;
+
+			var padu2 = false;
+			var padd2 = false;
+
+			var ppady;
+			var ppady2;
+
+			var blue = 0x990bc1f4;
+
+			function sketch(processing) {
+				var p = processing;
+				//setup
+				p.setup = function() {
+				p.size(800,400);
+				p.noStroke();
+				p.smooth();
+			}
+			//Draw
+			p.draw = function() {   
+					p.background(0);
+					x -= xd;
+					y += yd;
+				if(x<0){
+					x=p.width;
+					y=p.random(h*2,p.height-h*2);
+					yd=5
+					p.fill(255);
+					p.textSize(22);
+					p.text("GAME OVER", 340, 200);
+					p.fill(255);
+					p.textSize(13);
+					p.text("Press enter to try again", 340, 220);
+					//p.noLoop();
+				}
+
+				if(x>p.width - w && xd==-1){xd=-xd};
+				if(x<p.width - w && xd==1){xd=xd};
+
+				if( y<0 + h || y>p.height - h){yd=-yd};
+				if( y>0 + h || y<p.height - h){yd=yd};
+
+				pady=p.constrain(pady,0,p.height-padh);
+				pady2=p.constrain(pady,0,p.height-padh);
+
+				if(x<=hit-padw && x>=hit && y<pady && y>pady2+padh){
+						xd*=-1;
+					if(pady2!=ppady2){d=(pady2-ppady2)/2;}
+						score2++;
+				}
+
+				if(x>=hit-padw && x<=hit && y>pady && y<pady+padh){
+						xd*=-1;
+					if(pady!=ppady){d=(pady-ppady)/2;}
+						score++;
+				}
+
+
+				p.fill(255);
+				p.textSize(20);
+				p.text("score: "+score, 30, 375);
+				p.fill(blue);
+				p.ellipse(x,y,h*2,w*2);
+
+				if(padu==true){pady-=5;}
+				if(padd==true){pady+=5;}
+
+				p.rect(padx,pady,padw,padh);
+
+				if(padu2==true){pady2-=5;}
+				if(padd2==true){pady2+=5;}
+
+				if(x>p.width){xd*=-1;}
+				if(y>p.height-h*2 || y<h*2){yd*=-1;}
+
+				p.rect(padx2,pady2,padw,padh);
+
+				ppady = pady;
+				ppady2 = pady2;
+			}	
+
+			p.keyPressed = function(){
+				if (p.keyCode == p.UP) {
+					padu = true;
+				} else if (p.keyCode == p.DOWN) {
+					padd = true;
+				} else if (p.keyCode == p.CONTROL || p.key == 'W') {
+    				console.log("asd");
+					padu2 = true;
+				} else if (p.keyCode == p.ALT || p.key == 'S') {
+					padd2 = true;
+				}
+				if (p.keyCode == p.ENTER) { score=0; p.loop();}
+			}
+
+			p.keyReleased = function(){
+					padu=false;
+					padd=false;
+					padu2=false;
+					padd2=false;
+				}
+			}
+
+			new Processing(document.getElementById("canvas"), sketch);
+		</script>
+	</body>
+</html>
