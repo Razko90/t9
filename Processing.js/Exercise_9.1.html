@@ -31,7 +31,10 @@
 			var w = 7;
 			var h = 7;
 			var score=0;
-			var score2=0;
+			var score2=-1;
+
+			var life = 3;
+			var life2 = 3;
 
 			var padu = false;
 			var padd = false;
@@ -54,21 +57,22 @@
 			//Draw
 			p.draw = function() {  
 
-				p.background(0);
-				x -= xd;
+			p.background(0);
+
+			var i = p.random(2);
+				x -= xd; console.log(x);//p.noLoop();
 				y += yd;
+
 			if(x<0){
 				x=p.width;
 				y=p.random(h*2,p.height-h*2);
 				yd=5
-				p.fill(255);
-				p.textSize(22);
-				p.text("GAME OVER", 340, 200);
-				p.fill(255);
-				p.textSize(13);
-				p.text("Press enter to try again", 340, 220);
-				//p.noLoop();
-			} 
+			}
+			else if(x == 800){
+				x=0;
+				y=p.random(h*2,p.height-h*2);
+				yd=5
+			}
 
 				if(x>p.width - w && xd==1){xd=-xd};
 				if( y<0 + h || y>p.height - h){yd=-yd};
@@ -85,7 +89,9 @@
 						score++;
 				}
 
-				if(x<=hit-padw2 && x>=hit && y<pady2 && y>pady2+padh2){
+				//console.log(hit2-padw2,hit2);
+
+				if(x>=hit2-padw2 && x<=hit2 && y>pady2 && y<pady2+padh2){
 					console.log("asd");
 						xd*=-1;
 					if(pady2!=ppady2){d=(pady2-ppady2)/2;}
@@ -111,6 +117,7 @@
 
 				p.textSize(20);
 				p.text("score: "+score, 30, 375);
+				p.text("score: "+score2, 700, 375);
 
 				p.fill(blue);
 				p.ellipse(x,y,h*2,w*2);
@@ -124,16 +131,17 @@
 			}	
 
 			p.keyPressed = function(){
+
 				if (p.keyCode == p.UP) {
 					padu = true;
 				}
 				if (p.keyCode == p.DOWN) {
 					padd = true;
 				}
-				if (p.keyCode == p.CONTROL) {
+				if (p.keyCode == 87) {
 					padu2 = true;
 				}
-				if (p.keyCode == p.ALT) {
+				if (p.keyCode == 83) {
 					padd2 = true;
 				}
 
@@ -141,11 +149,18 @@
 			}
 
 			p.keyReleased = function(){
-					padu=false;
-					padd=false;
-
-					padu2=false;
-					padd2=false;
+				if (p.keyCode == p.UP) {
+					padu = false;
+				}
+				if (p.keyCode == p.DOWN) {
+					padd = false;
+				}
+				if (p.keyCode == 87) {
+					padu2 = false;
+				}
+				if (p.keyCode == 83) {
+					padd2 = false;
+				}
 				}
 			}
 
