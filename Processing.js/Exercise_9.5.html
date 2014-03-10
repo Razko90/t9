@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+	
+			var color = 0x990bc1f4;
+
+			function sketch(processing) {
+				var p = processing;
+				/* @pjs preload="shroom.jpg"; */
+				var img;
+
+				p.setup = function() {
+					p.size(600,600);
+					p.background(255);
+					img = p.loadImage("shroom.jpg");
+					p.frameRate(60);
+				}
+				
+				p.draw = function() {   
+					p.image(img,p.random(p.width),p.random(p.height),40,40);
+	 			}
+	  		}
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>

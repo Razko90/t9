@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>*{margin:0;padding:0;}</style>
+		<script src="process-1.4.1.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+	
+			function sketch(processing) {
+				var p = processing;
+				var pressed = false;
+				var hw = 40;
+
+				p.setup = function() {
+					p.size(600,600);
+					p.background(255);
+					p.frameRate(40);
+				}
+
+				p.draw = function() {
+					if (pressed == true) {
+						for (var i = 0; i < 3; i++){
+		 					console.log(i);
+		 					p.fill(p.random(255),p.random(255),p.random(255));
+		 					if (i == 1){
+		 					p.rect(p.mouseX,p.mouseY,p.random(hw),p.random(hw));
+	 						} else if (i == 2){
+		 					p.ellipse(p.mouseX,p.mouseY,p.random(hw),p.random(hw));
+	 						} else if (i == 3){
+		 					p.triangle(p.mouseX,p.mouseX,p.mouseY,p.mouseX,p.random(hw),p.random(hw));
+	 						}
+	 					}
+	 				}
+	 			}
+
+	 			p.mousePressed = function() {
+	 				pressed = true;
+	 			}
+	 			p.mouseReleased = function() {
+	 				pressed = false;
+	 			}
+	  		}
+
+			new Processing(document.getElementById("canvas"), sketch);
+			
+		</script>
+	</body>
+</html>
