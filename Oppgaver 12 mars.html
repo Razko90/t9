@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lol</title>
+	<style>
+		* {box-sizing: border-box;}
+		div {
+			padding: 20px;
+			border: 3px dotted black;
+			float:left;
+			width: 25%;
+		}
+		.selected {
+			border-color: #f00;
+		} 
+	</style>
+</head>
+<body>
+<script>
+	for (var i = 0; i < 20; i++){
+		var lol = document.createElement('div');
+		document.body.appendChild(lol);
+
+		for (var j = 0; j < 4; j++){
+			var lol2 = document.createElement('div');
+			lol.appendChild(lol2);
+		}
+	}
+	document.addEventListener("click", function(e){
+
+			var allDiv = document.querySelectorAll("div");
+
+			for(var k = 0; k < allDiv.length; k++){
+				allDiv[k].style.borderColor ="#000";
+			}
+
+			var pn = e.target;
+
+			e.target.style.borderColor ="#f00";
+
+			while(pn.parentNode){ 
+				pn.style.borderColor ="#f00";
+				pn = pn.parentNode;
+			}		
+	}, true);
+
+
+</script>
+</body>
+</html>

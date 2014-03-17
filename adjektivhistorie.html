@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Adjektivhistorie</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<style>
+	* {margin:0;padding: 0;}
+	body{font-family: 'Lato', sans-serif; font-size: 26px;width: 50%;margin: 0 auto;letter-spacing: 0.1em;background: #fafafa;margin-top: 40px; line-height: 1.7em;}
+	span{background:black; color:white;}
+	</style>
+</head>
+<body>
+	<h1>Hei, <span></span>!</h1>
+	<p>Det var en gang en <span>Adjektiv</span> klasse som skulle lære seg noe <span>Adjektiv</span> javascript. De studentene som var litt <span>Adjektiv</span> så ut til å skjønne hva som skjedde, mens de som var litt <span>Adjektiv</span> ikke så ut til å forstå like mye. Læreren, en <span>Adjektiv</span> fyr, prøvde så godt han kunne, han forklarte til han ble helt <span>Adjektiv</span> i trynet. Temaet, som i sammenligning med de andre, var litt <span>Adjektiv</span> utartet seg til å bli værre i det de i tillegg skulle løre om noe man kaller <span>Adjektiv</span> DOM. Studentene så ut til å bli både <span>Adjektiv</span> og <span>Adjektiv</span> av denne objektmodellen. Men det gikk ikke så bra til slutt.</p>
+
+
+<script>
+	var name = prompt("Hva heter du?", "Minst to bokstaver");
+
+	while(name.length <= 2) {
+		var name = prompt("Hva heter du?");
+	}
+
+	var test = document.querySelector("h1 span");
+	test.innerHTML = name;
+
+	var spans = document.querySelectorAll("p span");
+	//var adj = ["stor", "liten", "stygg", "trillende", "smellfeite", "rund", "kleine", "musikalske", "yndinge", "tullete"];
+	var adj = ["1","2","3","4","5","6","7","8","9","10"];
+	var j = 0;
+
+	document.addEventListener("click", function(e){
+		if(j > spans.length-1) return;
+		if(e.target.tagName != "SPAN") return;
+
+		var math = Math.floor(Math.random() * adj.length);
+
+		e.target.innerHTML = adj[math];
+		adj.splice(math,1);
+
+		j++;
+	}, true);
+</script>
+
+
+</body>
+</html>

@@ -49,8 +49,8 @@
 				p.draw = function() {   
 					x+=xd;
 					y+=yd;
-					if( x<0 + w/p.PI || x>p.width - w/p.PI){xd=-xd};
-					if( y<0 + h/p.PI || y>p.height - h/p.PI){yd=-yd};
+					if( x<0 + w/2 || x>p.width - w/2){xd=-xd};
+					if( y<0 + h/2 || y>p.height - h/2){yd=-yd};
 
 					p.fill(255,10);
 					p.rect(0,0,500,500);
@@ -61,8 +61,8 @@
 
 					xx+=xxd;  
 					yy+=yyd;
-					if( xx<0 + w/p.PI || xx>p.width - w/p.PI){xxd=-xxd}; 
-					if( yy<0 + h/p.PI || yy>p.height - h/p.PI){yyd=-yyd}; 
+					if( xx<0 + w/2 || xx>p.width - w/2){xxd=-xxd}; 
+					if( yy<0 + h/2 || yy>p.height - h/2){yyd=-yyd}; 
 
 	  				p.fill(green);
 	  				p.ellipse(xx,yy,h,w);
